@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 /**
  * Created by vsossella on 09/01/18.
@@ -74,6 +75,9 @@ public class VerticalSeekBar extends RelativeLayout {
 
     }
 
+    int valor = 500;
+    int step = 25;
+
     private void addThumbTouchListener() {
 
 
@@ -81,7 +85,12 @@ public class VerticalSeekBar extends RelativeLayout {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
 
-                float heightArea = getHeight() - marginTop;
+                int interations = valor / step;
+
+                int heightArea = getHeight() - marginTop;
+
+                int pxToInterations = heightArea / interations;
+
 
                 switch (event.getAction()) {
 
@@ -101,23 +110,29 @@ public class VerticalSeekBar extends RelativeLayout {
 
                         float yToMove  = event.getRawY() + dY;
 
+                        int multiplier = (int)yToMove / pxToInterations;
+                        float calculatedValue = valor - (multiplier * step);
+
                         if (yToMove < marginTop) {
                             verticalSeekBarBackground.setY(marginTop);
                             verticalSeekBarThumb.setY(0);
+                            calculatedValue = valor;
                         }
                         if (yToMove > heightArea) {
                             verticalSeekBarBackground.setY(heightArea);
                             verticalSeekBarThumb.setY(heightArea - marginTop);
+
+                            calculatedValue = 0;
                         }
 
                         if (yToMove > marginTop && yToMove <= heightArea) {
-
-                            Log.d("MOVING", String.format("Y do componente: %f - DY: %f - event.getRawY(): %f - yToMove: %f", getY(), dY, event.getRawY(), yToMove));
                             verticalSeekBarBackground.setY(yToMove);
                             verticalSeekBarThumb.setY(yToMove-marginTop);
                         }
 
-
+                        ((TextView)layoutView.findViewById(R.id.text_value_test)).setText(String.valueOf(calculatedValue));
+                        Log.d("MOVING",
+                                String.format("Valor: %f / Height do component: %f / Y do componente: %f / DY: %f - event.getRawY(): %f / yToMove: %f",calculatedValue, (float)heightArea, getY(), dY, event.getRawY(), yToMove));
                         break;
                     default:
                         return false;
