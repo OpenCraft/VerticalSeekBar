@@ -27,8 +27,8 @@ public class VerticalSeekBar extends RelativeLayout {
     int maxValue = 0;
     int step = 0;
     int calculatedValue = 0;
-    final int defaultValue = 500;
-    final int defaultStep = 25;
+    final int DEFAULT_VALUE = 500;
+    final int DEFAULT_STEP = 25;
 
     public VerticalSeekBar(Context context) {
         super(context);
@@ -62,11 +62,11 @@ public class VerticalSeekBar extends RelativeLayout {
     }
 
     private void loadValueAttr(TypedArray attributes) {
-        value = attributes.getInteger(R.styleable.VerticalSeekBar_seekbar_value, defaultValue);
+        value = attributes.getInteger(R.styleable.VerticalSeekBar_seekbar_value, DEFAULT_VALUE);
     }
 
     private void loadStepAttr(TypedArray attributes) {
-        step = attributes.getInteger(R.styleable.VerticalSeekBar_seekbar_step, defaultStep);
+        step = attributes.getInteger(R.styleable.VerticalSeekBar_seekbar_step, DEFAULT_STEP);
     }
 
     private void loadMaxValueAttr(TypedArray attributes) {
