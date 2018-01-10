@@ -9,9 +9,7 @@
         android:id="@+id/agiplan_custom_seekbar_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:background="@color/colorAccent">
-
-    </RelativeLayout>
+        tools:background="@color/colorAccent" />
 
     <ImageView
         android:id="@+id/agiplan_custom_seekbar_thumb"
@@ -19,6 +17,5 @@
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         tools:background="@color/colorPrimaryDark"/>
-
 
 </RelativeLayout>
