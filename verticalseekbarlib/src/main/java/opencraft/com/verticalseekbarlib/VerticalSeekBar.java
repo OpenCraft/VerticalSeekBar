@@ -20,7 +20,7 @@ public class VerticalSeekBar extends RelativeLayout {
     View layoutView, verticalSeekBarBackground, verticalSeekBarThumb;
     VerticalSeekBarListener listener;
     float dY = 0;
-    int marginTop = 0, valor = 500, step = 25, calculatedValue = 0;
+    int marginTop = 0, valor = 0, step = 0, calculatedValue = 0;
 
     public VerticalSeekBar(Context context) {
         super(context);
