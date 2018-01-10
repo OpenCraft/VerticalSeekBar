@@ -1,10 +1,7 @@
 package opencraft.com.verticalseekbar
 
-import android.content.Context
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.View
+import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,6 +11,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
+
+        seekbar.setVerticalSeekBarListener { f ->
+            run {
+                text_top.text = (500 - f).toString()
+                text_bottom.text = f.toString()
+            }
+        }
 
     }
 
