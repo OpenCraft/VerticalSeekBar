@@ -17,10 +17,18 @@ import android.widget.RelativeLayout;
 public class VerticalSeekBar extends RelativeLayout {
 
     LayoutInflater inflater;
-    View layoutView, verticalSeekBarBackground, verticalSeekBarThumb;
+    View layoutView;
+    View verticalSeekBarBackground;
+    View verticalSeekBarThumb;
     VerticalSeekBarListener listener;
     float dY = 0;
-    int marginTop = 0, value = 0, defaultValue = 500, defaultStep = 25, maxValue = 0, step = 0, calculatedValue = 0;
+    int marginTop = 0;
+    int value = 0;
+    int maxValue = 0;
+    int step = 0;
+    int calculatedValue = 0;
+    final int defaultValue = 500;
+    final int defaultStep = 25;
 
     public VerticalSeekBar(Context context) {
         super(context);
