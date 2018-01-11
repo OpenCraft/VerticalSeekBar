@@ -108,7 +108,7 @@ public class VerticalSeekBar extends RelativeLayout {
                         break;
                     }
                     case MotionEvent.ACTION_MOVE: {
-                        float wantedY = event.getRawY() + dY;
+                        float wantedY = event.getRawY() + dY + verticalSeekBarThumb.getHeight() / 2;
                         int multiplier = (int) wantedY / pixelNumberToInteraction;
                         calculatedValue = value - (multiplier * step);
                         int interationsToGetMaxValue = maxValue / step;
