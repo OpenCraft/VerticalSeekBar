@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="VerticalSeekBar">
-        <attr name="seekbar_background_margin_top" format="dimension" />
+        <attr name="seekbar_thumbMarginTop" format="dimension" />
         <attr name="seekbar_backgroundColor" format="color" />
         <attr name="seekbar_thumb" format="reference" />
         <attr name="seekbar_step" format="integer" />

@@ -22,15 +22,13 @@ public class VerticalSeekBar extends RelativeLayout {
     View verticalSeekBarThumb;
     VerticalSeekBarListener listener;
     float dY = 0;
-    int marginTop = 0;
+    int thumbMarginTop = 0;
     int value = 0;
     int maxValue = 0;
     int step = 0;
-    int calculatedValue = 0;
+    float calculatedValue = 0;
     final int DEFAULT_VALUE = 500;
     final int DEFAULT_STEP = 25;
-    boolean hitBottom = false;
-    float hitBottomY = 0;
 
     public VerticalSeekBar(Context context) {
         super(context);
@@ -60,7 +58,7 @@ public class VerticalSeekBar extends RelativeLayout {
         loadValueAttr(attributes);
         loadStepAttr(attributes);
         loadMaxValueAttr(attributes);
-        setupBackgroundMarginTopAttr(attributes);
+        setupThumbMarginTopAttr(attributes);
     }
 
     private void loadValueAttr(TypedArray attributes) {
@@ -72,7 +70,7 @@ public class VerticalSeekBar extends RelativeLayout {
     }
 
     private void loadMaxValueAttr(TypedArray attributes) {
-        maxValue = attributes.getInteger(R.styleable.VerticalSeekBar_seekbar_max_value, 0);
+        maxValue = attributes.getInteger(R.styleable.VerticalSeekBar_seekbar_max_value, value);
     }
 
     private void loadBackgroundAttr(TypedArray attributes) {
@@ -85,13 +83,14 @@ public class VerticalSeekBar extends RelativeLayout {
         ((ImageView) verticalSeekBarThumb).setImageResource(thumbResourceId);
     }
 
-    private void setupBackgroundMarginTopAttr(TypedArray attributes) {
-        marginTop = attributes.getDimensionPixelSize(R.styleable.VerticalSeekBar_seekbar_background_margin_top, 0);
+    private void setupThumbMarginTopAttr(TypedArray attributes) {
+        thumbMarginTop = attributes.getDimensionPixelSize(R.styleable.VerticalSeekBar_seekbar_thumbMarginTop, 0);
         LayoutParams layoutParams = new LayoutParams(
-                LayoutParams.MATCH_PARENT,
-                LayoutParams.MATCH_PARENT);
-        layoutParams.setMargins(0, marginTop, 0, 0);
-        verticalSeekBarBackground.setLayoutParams(layoutParams);
+                LayoutParams.WRAP_CONTENT,
+                LayoutParams.WRAP_CONTENT);
+        layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        layoutParams.setMargins(0, thumbMarginTop, 0, 0);
+        verticalSeekBarThumb.setLayoutParams(layoutParams);
     }
 
     private void addThumbTouchListener() {
@@ -99,7 +98,6 @@ public class VerticalSeekBar extends RelativeLayout {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 int interations = value / step;
-                int heightAreaLessMarginTop = getHeight() - marginTop;
                 int pixelNumberToInteractionWithoutMargin = getHeight() / interations;
 
                 switch (event.getAction()) {
@@ -109,31 +107,24 @@ public class VerticalSeekBar extends RelativeLayout {
                         break;
                     }
                     case MotionEvent.ACTION_MOVE: {
-                        float wantedY = event.getRawY() + dY + verticalSeekBarThumb.getHeight() / 2;
-                        float wantedYForBottom;
-                        int multiplier;
-
-                        if (hitBottom) {
-                            wantedYForBottom = wantedY + marginTop;
-                            multiplier = (int) wantedYForBottom / pixelNumberToInteractionWithoutMargin;
-                            hitBottom = hitBottomY < wantedY;
-                        } else {
-                            multiplier = (int) wantedY / pixelNumberToInteractionWithoutMargin;
-                        }
-
+                        float wantedY = event.getRawY() + dY - thumbMarginTop;
+                        float multiplier = (int) verticalSeekBarBackground.getY() / pixelNumberToInteractionWithoutMargin;
                         calculatedValue = value - (multiplier * step);
                         int interationsToGetMaxValue = maxValue / step;
                         float maxValueY = interationsToGetMaxValue * pixelNumberToInteractionWithoutMargin;
 
-                        if (wantedY <= maxValueY || maxValueY == 0) {
-                            handleIfHitTop(wantedY);
-                            handleIfHitBottom(heightAreaLessMarginTop, wantedY);
-                            handleIfIsBetweenTopAndBottom(heightAreaLessMarginTop, wantedY);
-
+                        if (wantedY <= maxValueY && wantedY >= 0) {
+                            setYPosition(wantedY, wantedY);
                             callOnValueChanged(calculatedValue);
                         } else {
-                            callOnValueChanged(maxValue);
-                            setYPosition(maxValueY, maxValueY - marginTop);
+                            if (wantedY >= maxValueY) {
+                                callOnValueChanged(maxValue);
+                                setYPosition(maxValueY, maxValueY);
+                            }
+                            if (wantedY <= 0) {
+                                callOnValueChanged(0);
+                                setYPosition(0, 0);
+                            }
                         }
                         break;
                     }
@@ -150,31 +141,14 @@ public class VerticalSeekBar extends RelativeLayout {
             listener.onValueChanged(value);
     }
 
-    private void handleIfIsBetweenTopAndBottom(int heightArea, float wantedY) {
-        if (wantedY > marginTop && wantedY <= heightArea) {
-            setYPosition(wantedY, wantedY - marginTop);
-        }
-    }
-
-    private void handleIfHitBottom(int heightArea, float wantedY) {
-        if (wantedY - marginTop > heightArea) {
-            hitBottom = true;
-            hitBottomY = heightArea - marginTop;
-            setYPosition(heightArea, heightArea - marginTop);
-            calculatedValue = 0;
-        }
-    }
-
-    private void handleIfHitTop(float wantedY) {
-        if (wantedY + marginTop < marginTop) {
-            setYPosition(marginTop, 0);
-            calculatedValue = value;
-        }
-    }
-
     private void setYPosition(float yBackground, float yThumb) {
         verticalSeekBarBackground.setY(yBackground);
-        verticalSeekBarThumb.setY(yThumb);
+        verticalSeekBarThumb.setY(yThumb + thumbMarginTop);
+
+        LayoutParams layoutParams = new LayoutParams(
+                LayoutParams.MATCH_PARENT,
+                getHeight() - (int) yBackground);
+        verticalSeekBarBackground.setLayoutParams(layoutParams);
     }
 
     public void setVerticalSeekBarListener(VerticalSeekBarListener verticalSeekBarListener) {
