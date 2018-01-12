@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         seekbar.setVerticalSeekBarListener { f ->
             run {
-                text_top.text = (500 - f).toString()
+                text_top.text = (5000 - f).toString()
                 text_bottom.text = f.toString()
             }
         }

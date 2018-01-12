@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:clipChildren="false"
     android:background="@color/colorAccent"
     android:layout_height="match_parent">
 
@@ -20,18 +21,6 @@
         android:layout_height="wrap_content" />
 
 
-    <opencraft.com.verticalseekbarlib.VerticalSeekBar
-        android:id="@+id/seekbar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottom"
-        android:layout_below="@+id/top"
-        app:seekbar_backgroundColor="@color/colorPrimaryDark"
-        app:seekbar_background_margin_top="25dp"
-        app:seekbar_thumb="@drawable/check_on"
-        app:seekbar_max_value="250"
-        app:seekbar_value="500"
-        app:seekbar_step="25"/>
 
     <View
         android:id="@+id/bottom"
@@ -46,5 +35,20 @@
         android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+
+    <opencraft.com.verticalseekbarlib.VerticalSeekBar
+        android:id="@+id/seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom"
+        android:layout_below="@+id/top"
+        android:clipChildren="false"
+        app:seekbar_backgroundColor="@color/colorPrimaryDark"
+        app:seekbar_thumbMarginTop="-25dp"
+        app:seekbar_thumb="@drawable/check_on"
+
+        app:seekbar_value="5000"
+        app:seekbar_step="25" />
 
 </RelativeLayout>
