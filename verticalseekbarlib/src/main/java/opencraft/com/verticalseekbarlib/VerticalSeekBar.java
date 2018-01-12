@@ -29,6 +29,8 @@ public class VerticalSeekBar extends RelativeLayout {
     int calculatedValue = 0;
     final int DEFAULT_VALUE = 500;
     final int DEFAULT_STEP = 25;
+    boolean hitBottom = false;
+    float hitBottomY = 0;
 
     public VerticalSeekBar(Context context) {
         super(context);
@@ -96,10 +98,9 @@ public class VerticalSeekBar extends RelativeLayout {
         verticalSeekBarThumb.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
-
                 int interations = value / step;
-                int heightArea = getHeight() - marginTop;
-                int pixelNumberToInteraction = heightArea / interations;
+                int heightAreaLessMarginTop = getHeight() - marginTop;
+                int pixelNumberToInteractionWithoutMargin = getHeight() / interations;
 
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
@@ -109,15 +110,25 @@ public class VerticalSeekBar extends RelativeLayout {
                     }
                     case MotionEvent.ACTION_MOVE: {
                         float wantedY = event.getRawY() + dY + verticalSeekBarThumb.getHeight() / 2;
-                        int multiplier = (int) wantedY / pixelNumberToInteraction;
+                        float wantedYForBottom;
+                        int multiplier;
+
+                        if (hitBottom) {
+                            wantedYForBottom = wantedY + marginTop;
+                            multiplier = (int) wantedYForBottom / pixelNumberToInteractionWithoutMargin;
+                            hitBottom = hitBottomY < wantedY;
+                        } else {
+                            multiplier = (int) wantedY / pixelNumberToInteractionWithoutMargin;
+                        }
+
                         calculatedValue = value - (multiplier * step);
                         int interationsToGetMaxValue = maxValue / step;
-                        float maxValueY = interationsToGetMaxValue * pixelNumberToInteraction;
+                        float maxValueY = interationsToGetMaxValue * pixelNumberToInteractionWithoutMargin;
 
                         if (wantedY <= maxValueY || maxValueY == 0) {
                             handleIfHitTop(wantedY);
-                            handleIfHitBottom(heightArea, wantedY);
-                            handleIfIsBetweenTopAndBottom(heightArea, wantedY);
+                            handleIfHitBottom(heightAreaLessMarginTop, wantedY);
+                            handleIfIsBetweenTopAndBottom(heightAreaLessMarginTop, wantedY);
 
                             callOnValueChanged(calculatedValue);
                         } else {
@@ -146,14 +157,16 @@ public class VerticalSeekBar extends RelativeLayout {
     }
 
     private void handleIfHitBottom(int heightArea, float wantedY) {
-        if (wantedY > heightArea) {
+        if (wantedY - marginTop > heightArea) {
+            hitBottom = true;
+            hitBottomY = heightArea - marginTop;
             setYPosition(heightArea, heightArea - marginTop);
             calculatedValue = 0;
         }
     }
 
     private void handleIfHitTop(float wantedY) {
-        if (wantedY < marginTop) {
+        if (wantedY + marginTop < marginTop) {
             setYPosition(marginTop, 0);
             calculatedValue = value;
         }

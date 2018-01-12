@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
-        android:background="@color/colorAccent" />
+        android:background="@color/colorPrimary" />
 
     <TextView
         android:id="@+id/text_top"
@@ -26,9 +26,10 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom"
         android:layout_below="@+id/top"
-        app:seekbar_backgroundColor="@color/colorPrimary"
+        app:seekbar_backgroundColor="@color/colorPrimaryDark"
         app:seekbar_background_margin_top="25dp"
         app:seekbar_thumb="@drawable/check_on"
+        app:seekbar_max_value="250"
         app:seekbar_value="500"
         app:seekbar_step="25"/>
 
