@@ -7,5 +7,6 @@ package opencraft.com.verticalseekbarlib;
 public interface VerticalSeekBarListener {
 
     void onValueChanged(float value);
+    void onYPositionChanged(float thumbY, float backgroundY);
 
 }

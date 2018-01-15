@@ -147,6 +147,7 @@ public class VerticalSeekBar extends RelativeLayout {
                 }
             });
             animSetViews.start();
+            listener.onYPositionChanged(finalYPosition + thumbMarginTop, finalYPosition);
         }
     }
 
@@ -182,9 +183,19 @@ public class VerticalSeekBar extends RelativeLayout {
     }
 
     private void setYPosition(float yBackground, float yThumb) {
+        float accurateYThumb = yThumb + thumbMarginTop;
         verticalSeekBarBackground.setY(yBackground);
-        verticalSeekBarThumb.setY(yThumb + thumbMarginTop);
+        verticalSeekBarThumb.setY(accurateYThumb);
         addMarginToBackground(yBackground);
+        listener.onYPositionChanged(accurateYThumb, yBackground);
+    }
+
+    public View getVerticalSeekBarBackground() {
+        return verticalSeekBarBackground;
+    }
+
+    public View getVerticalSeekBarThumb() {
+        return verticalSeekBarThumb;
     }
 
     private void addMarginToBackground(float yBackground) {
