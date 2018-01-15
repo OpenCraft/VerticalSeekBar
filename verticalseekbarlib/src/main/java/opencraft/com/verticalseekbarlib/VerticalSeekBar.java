@@ -169,11 +169,11 @@ public class VerticalSeekBar extends RelativeLayout {
             callOnValueChanged(calculatedValue);
         } else {
             if (wantedY >= maxValueY) {
-                callOnValueChanged(maxValue);
+                callOnValueChanged(value == maxValue ? 0 : maxValue);
                 setYPosition(maxValueY, maxValueY);
             }
             if (wantedY <= 0) {
-                callOnValueChanged(0);
+                callOnValueChanged(value);
                 setYPosition(0, 0);
             }
         }

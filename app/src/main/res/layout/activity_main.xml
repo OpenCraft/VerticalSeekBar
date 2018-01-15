@@ -21,12 +21,7 @@
         android:layout_height="wrap_content" />
 
 
-    <TextView
-        android:id="@+id/text_bottom"
-        android:text="500"
-        android:layout_alignParentBottom="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
 
     <ImageView
         android:id="@+id/background_top"
@@ -53,6 +48,7 @@
         app:seekbar_thumbMarginTop="-25dp"
         app:seekbar_thumb="@drawable/check_on"
         app:seekbar_value="5000"
+        app:seekbar_max_value="2500"
         app:seekbar_step="25" />
 
     <View
@@ -62,5 +58,11 @@
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary" />
 
+    <TextView
+        android:id="@+id/text_bottom"
+        android:text="500"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

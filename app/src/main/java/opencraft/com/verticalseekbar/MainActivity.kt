@@ -8,6 +8,8 @@ import opencraft.com.verticalseekbarlib.VerticalSeekBarListener
 
 class MainActivity : AppCompatActivity() {
 
+    var animationStoped = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -16,9 +18,12 @@ class MainActivity : AppCompatActivity() {
             override fun onAnimationStop(thumbY: Float, backgroundY: Float) {
                 balloon.y = thumbY - 15
                 balloon.visibility = View.VISIBLE
+                animationStoped = true
             }
 
             override fun onYPositionChanged(thumbY: Float, backgroundY: Float) {
+                if (animationStoped)
+                    balloon.visibility = View.GONE
                 background_top.y = backgroundY + top.height - 10
             }
 
