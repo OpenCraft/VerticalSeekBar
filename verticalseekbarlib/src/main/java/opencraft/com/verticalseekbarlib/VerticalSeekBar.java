@@ -31,6 +31,7 @@ public class VerticalSeekBar extends RelativeLayout {
     int maxValue = 0;
     int step = 0;
     float calculatedValue = 0;
+    int wantedValue = 0;
     final int DEFAULT_VALUE = 500;
     final int DEFAULT_STEP = 25;
 
@@ -52,6 +53,13 @@ public class VerticalSeekBar extends RelativeLayout {
         addThumbTouchListener();
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        if (hasWindowFocus && wantedValue != 0) {
+            applyInitialAnimation(wantedValue);
+        }
+    }
+
     private void loadCustomAttrs(Context context, AttributeSet attrs) {
         TypedArray attributes = context.getTheme().obtainStyledAttributes(
                 attrs,
@@ -60,6 +68,7 @@ public class VerticalSeekBar extends RelativeLayout {
         loadBackgroundAttr(attributes);
         loadThumbAttr(attributes);
         loadValueAttr(attributes);
+        loadWantedValueAttr(attributes);
         loadStepAttr(attributes);
         loadMaxValueAttr(attributes);
         setupThumbMarginTopAttr(attributes);
@@ -67,6 +76,10 @@ public class VerticalSeekBar extends RelativeLayout {
 
     private void loadValueAttr(TypedArray attributes) {
         value = attributes.getInteger(R.styleable.VerticalSeekBar_seekbar_value, DEFAULT_VALUE);
+    }
+
+    private void loadWantedValueAttr(TypedArray attributes) {
+        wantedValue = attributes.getInteger(R.styleable.VerticalSeekBar_seekbar_wantedVAlue, wantedValue);
     }
 
     private void loadStepAttr(TypedArray attributes) {
@@ -219,5 +232,9 @@ public class VerticalSeekBar extends RelativeLayout {
 
     public void setStep(int step) {
         this.step = step;
+    }
+
+    public void setWantedValue(int wantedValue) {
+        this.wantedValue = wantedValue;
     }
 }

@@ -11,9 +11,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        seekbar.setWantedValue(2500)
         seekbar.setVerticalSeekBarListener(object: VerticalSeekBarListener{
             override fun onYPositionChanged(thumbY: Float, backgroundY: Float) {
-                background_top.y = backgroundY + top.height - 4
+                background_top.y = backgroundY + top.height - 10
             }
 
             override fun onValueChanged(f: Float) {
@@ -23,12 +24,5 @@ class MainActivity : AppCompatActivity() {
 
         })
     }
-
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        if (hasFocus) {
-            seekbar.applyInitialAnimation(2500)
-        }
-    }
-
 
 }

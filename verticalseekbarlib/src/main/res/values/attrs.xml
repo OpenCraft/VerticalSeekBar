@@ -6,6 +6,7 @@
         <attr name="seekbar_thumb" format="reference" />
         <attr name="seekbar_step" format="integer" />
         <attr name="seekbar_value" format="integer" />
+        <attr name="seekbar_wantedVAlue" format="integer" />
         <attr name="seekbar_max_value" format="integer" />
     </declare-styleable>
 
