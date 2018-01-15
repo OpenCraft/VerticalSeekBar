@@ -144,13 +144,13 @@ public class VerticalSeekBar extends RelativeLayout {
                     super.onAnimationEnd(animation);
                     addMarginToBackground(finalYPosition);
                     callOnValueChanged(calculatedValue);
+                    listener.onAnimationStop(verticalSeekBarThumb.getY(),
+                            verticalSeekBarBackground.getY());
                 }
             });
             animSetViews.start();
             listener.onYPositionChanged(finalYPosition + thumbMarginTop, finalYPosition);
         }
-        listener.onAnimationStop(verticalSeekBarThumb.getY(),
-                verticalSeekBarBackground.getY());
     }
 
     private void calculateValueFromYPosition(int yPosition, int pixelNumberToInteractionWithoutMargin) {

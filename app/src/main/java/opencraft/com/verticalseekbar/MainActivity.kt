@@ -2,6 +2,7 @@ package opencraft.com.verticalseekbar
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import opencraft.com.verticalseekbarlib.VerticalSeekBarListener
 
@@ -13,7 +14,8 @@ class MainActivity : AppCompatActivity() {
 
         seekbar.setVerticalSeekBarListener(object : VerticalSeekBarListener {
             override fun onAnimationStop(thumbY: Float, backgroundY: Float) {
-
+                balloon.y = thumbY - 15
+                balloon.visibility = View.VISIBLE
             }
 
             override fun onYPositionChanged(thumbY: Float, backgroundY: Float) {

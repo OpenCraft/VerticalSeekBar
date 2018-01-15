@@ -35,6 +35,13 @@
         android:src="@drawable/dotted"
         android:layerType="software" />
 
+    <View
+        android:id="@+id/balloon"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:background="#FFF"
+        android:layout_height="4dp"/>
+
     <opencraft.com.verticalseekbarlib.VerticalSeekBar
         android:id="@+id/seekbar"
         android:layout_width="match_parent"
