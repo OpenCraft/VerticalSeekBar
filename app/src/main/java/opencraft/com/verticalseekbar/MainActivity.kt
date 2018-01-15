@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         seekbar.setVerticalSeekBarListener(object: VerticalSeekBarListener{
             override fun onYPositionChanged(thumbY: Float, backgroundY: Float) {
-                background_top.y = backgroundY + top.height - 2
+                background_top.y = backgroundY + top.height - 4
             }
 
             override fun onValueChanged(f: Float) {

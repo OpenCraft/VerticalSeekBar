@@ -37,9 +37,9 @@
     <ImageView
         android:id="@+id/background_top"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#fff"
-        />
+        android:layout_height="5dp"
+        android:src="@drawable/dotted"
+        android:layerType="software" />
 
     <opencraft.com.verticalseekbarlib.VerticalSeekBar
         android:id="@+id/seekbar"
