@@ -21,5 +21,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        if (hasFocus) {
+            seekbar.applyInitialAnimation(2500)
+        }
+    }
+
 
 }
