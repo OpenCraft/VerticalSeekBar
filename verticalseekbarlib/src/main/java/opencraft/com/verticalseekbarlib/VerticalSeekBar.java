@@ -134,17 +134,17 @@ public class VerticalSeekBar extends RelativeLayout {
         for (int i = (int) verticalSeekBarBackground.getY(); i <= wantedValueY; i++) {
             calculateValueFromYPosition(i, pixelNumberToInteractionWithoutMargin);
 
-            ObjectAnimator animY = ObjectAnimator.ofFloat(verticalSeekBarThumb, "y", i + thumbMarginTop);
-            ObjectAnimator animY1 = ObjectAnimator.ofFloat(verticalSeekBarBackground, "y", i);
+            ObjectAnimator animVerticalSeekBarThumb = ObjectAnimator.ofFloat(verticalSeekBarThumb, "y", i + thumbMarginTop);
+            ObjectAnimator animVerticalSeekBarBackground = ObjectAnimator.ofFloat(verticalSeekBarBackground, "y", i);
             AnimatorSet animSetXY = new AnimatorSet();
-            animSetXY.playTogether(animY1, animY);
-            final int finalI = i;
+            animSetXY.playTogether(animVerticalSeekBarBackground, animVerticalSeekBarThumb);
+            final int finalYPosition = i;
 
             animSetXY.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    addMarginToBackground(finalI);
+                    addMarginToBackground(finalYPosition);
                     callOnValueChanged(calculatedValue);
                 }
             });
@@ -187,7 +187,6 @@ public class VerticalSeekBar extends RelativeLayout {
     private void setYPosition(float yBackground, float yThumb) {
         verticalSeekBarBackground.setY(yBackground);
         verticalSeekBarThumb.setY(yThumb + thumbMarginTop);
-
         addMarginToBackground(yBackground);
     }
 
