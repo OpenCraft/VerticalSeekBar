@@ -20,8 +20,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-
-
     <View
         android:id="@+id/bottom"
         android:layout_width="match_parent"
@@ -36,6 +34,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <ImageView
+        android:id="@+id/background_top"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:src="@drawable/dotted"
+        android:layerType="software" />
 
     <opencraft.com.verticalseekbarlib.VerticalSeekBar
         android:id="@+id/seekbar"
@@ -47,8 +51,9 @@
         app:seekbar_backgroundColor="@color/colorPrimaryDark"
         app:seekbar_thumbMarginTop="-25dp"
         app:seekbar_thumb="@drawable/check_on"
-
         app:seekbar_value="5000"
         app:seekbar_step="25" />
+
+
 
 </RelativeLayout>
