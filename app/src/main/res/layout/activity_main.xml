@@ -20,12 +20,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <View
-        android:id="@+id/bottom"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary" />
 
     <TextView
         android:id="@+id/text_bottom"
@@ -54,6 +48,12 @@
         app:seekbar_value="5000"
         app:seekbar_step="25" />
 
+    <View
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary" />
 
 
 </RelativeLayout>

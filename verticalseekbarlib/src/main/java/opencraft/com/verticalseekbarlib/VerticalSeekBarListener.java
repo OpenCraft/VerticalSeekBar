@@ -8,5 +8,6 @@ public interface VerticalSeekBarListener {
 
     void onValueChanged(float value);
     void onYPositionChanged(float thumbY, float backgroundY);
+    void onAnimationStop(float thumbY, float backgroundY);
 
 }
