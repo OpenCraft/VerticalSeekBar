@@ -4,7 +4,7 @@ This component act like seekbar but support vertical position. With this compone
 # Usage with gradle
 
 ```xml
-  compile 'com.github.OpenCraft:VerticalSeekBar:v1.0.10'cod
+  compile 'com.github.OpenCraft:VerticalSeekBar:v1.0.10'
 ```
 
 
