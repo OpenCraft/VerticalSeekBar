@@ -1,6 +1,8 @@
 # VerticalSeekBar
 This component act like seekbar but support vertical position. With this component you can change de thumb icon, the background color and also listen for every value changes and every Y position changes. Also you can setup the start value.
 
+![VerticalSeekBar](https://im5.ezgif.com/tmp/ezgif-5-9fb12df9a5.gif)
+
 # Usage with gradle
 
 ```xml
@@ -27,10 +29,6 @@ This component act like seekbar but support vertical position. With this compone
         app:seekbar_value="5000" />
 ```
 
-# GIF Ilustration
-
-![Alt Text](https://im5.ezgif.com/tmp/ezgif-5-9fb12df9a5.gif)
-
-## Child`s father
+## Author
 Vinicius Sossella
 viniciussossella@gmail.com
