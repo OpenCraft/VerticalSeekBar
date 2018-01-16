@@ -3,39 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:clipChildren="false"
+    android:layout_height="match_parent"
     android:background="@color/colorAccent"
-    android:layout_height="match_parent">
+    android:clipChildren="false">
 
     <View
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorAccent" />
 
     <TextView
         android:id="@+id/text_top"
-        android:text="0"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="0"
+        android:textColor="#FFF"
+        android:textSize="34sp" />
 
 
     <ImageView
         android:id="@+id/background_top"
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:src="@drawable/dotted"
-        android:layerType="software" />
+        android:layerType="software"
+        android:src="@drawable/dotted" />
 
     <View
         android:id="@+id/balloon"
-        android:visibility="gone"
         android:layout_width="match_parent"
+        android:layout_height="4dp"
         android:background="#FFF"
-        android:layout_height="4dp"/>
+        android:visibility="gone" />
 
     <opencraft.com.verticalseekbarlib.VerticalSeekBar
         android:id="@+id/seekbar"
@@ -45,24 +46,27 @@
         android:layout_below="@+id/top"
         android:clipChildren="false"
         app:seekbar_backgroundColor="@color/colorPrimaryDark"
-        app:seekbar_thumbMarginTop="-25dp"
-        app:seekbar_thumb="@drawable/check_on"
-        app:seekbar_value="5000"
         app:seekbar_max_value="2500"
-        app:seekbar_step="25" />
+        app:seekbar_step="25"
+        app:seekbar_thumb="@drawable/check_on"
+        app:seekbar_thumbMarginTop="-25dp"
+        app:seekbar_value="5000" />
 
     <View
         android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorPrimaryDark" />
 
     <TextView
         android:id="@+id/text_bottom"
-        android:text="500"
-        android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="500"
+        android:textColor="#FFF"
+        android:textSize="34sp" />
 
 </RelativeLayout>
