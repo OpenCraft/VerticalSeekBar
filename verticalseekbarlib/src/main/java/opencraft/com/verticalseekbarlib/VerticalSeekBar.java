@@ -33,6 +33,7 @@ public class VerticalSeekBar extends RelativeLayout {
     float calculatedValue = 0;
     final int DEFAULT_VALUE = 500;
     final int DEFAULT_STEP = 25;
+    int animationDuration = 0;
 
     public VerticalSeekBar(Context context) {
         super(context);
@@ -58,6 +59,7 @@ public class VerticalSeekBar extends RelativeLayout {
                 R.styleable.VerticalSeekBar,
                 0, 0);
         loadBackgroundAttr(attributes);
+        loadAnimationDurationAttr(attributes);
         loadThumbAttr(attributes);
         loadValueAttr(attributes);
         loadStepAttr(attributes);
@@ -75,6 +77,10 @@ public class VerticalSeekBar extends RelativeLayout {
 
     private void loadMaxValueAttr(TypedArray attributes) {
         maxValue = attributes.getInteger(R.styleable.VerticalSeekBar_seekbar_max_value, value);
+    }
+
+    private void loadAnimationDurationAttr(TypedArray attributes) {
+        animationDuration = attributes.getInteger(R.styleable.VerticalSeekBar_seekbar_animation_duration, 0);
     }
 
     private void loadBackgroundAttr(TypedArray attributes) {
@@ -130,13 +136,13 @@ public class VerticalSeekBar extends RelativeLayout {
 
         int interationsToGetWantedValue = wantedValue / step;
         float wantedValueY = interationsToGetWantedValue * pixelNumberToInteractionWithoutMargin;
+        AnimatorSet animSetViews = new AnimatorSet();
 
         for (int i = (int) verticalSeekBarBackground.getY(); i <= wantedValueY; i++) {
             final int finalYPosition = i;
             calculateValueFromYPosition(i, pixelNumberToInteractionWithoutMargin);
             ObjectAnimator animVerticalSeekBarThumb = ObjectAnimator.ofFloat(verticalSeekBarThumb, "y", i + thumbMarginTop);
             ObjectAnimator animVerticalSeekBarBackground = ObjectAnimator.ofFloat(verticalSeekBarBackground, "y", i);
-            AnimatorSet animSetViews = new AnimatorSet();
             animSetViews.playTogether(animVerticalSeekBarBackground, animVerticalSeekBarThumb);
             animSetViews.addListener(new AnimatorListenerAdapter() {
                 @Override
@@ -147,10 +153,18 @@ public class VerticalSeekBar extends RelativeLayout {
                     listener.onAnimationStop(verticalSeekBarThumb.getY(),
                             verticalSeekBarBackground.getY());
                 }
+
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    super.onAnimationStart(animation);
+
+                }
             });
-            animSetViews.start();
             listener.onYPositionChanged(finalYPosition + thumbMarginTop, finalYPosition);
         }
+
+        animSetViews.setDuration(animationDuration);
+        animSetViews.start();
     }
 
     private void calculateValueFromYPosition(int yPosition, int pixelNumberToInteractionWithoutMargin) {

@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:background="#FFF"
-        android:visibility="gone" />
+        android:alpha="0" />
 
     <opencraft.com.verticalseekbarlib.VerticalSeekBar
         android:id="@+id/seekbar"
@@ -50,7 +50,8 @@
         app:seekbar_step="25"
         app:seekbar_thumb="@drawable/check_on"
         app:seekbar_thumbMarginTop="-25dp"
-        app:seekbar_value="5000" />
+        app:seekbar_value="5000"
+        app:seekbar_animation_duration="1500"/>
 
     <View
         android:id="@+id/bottom"

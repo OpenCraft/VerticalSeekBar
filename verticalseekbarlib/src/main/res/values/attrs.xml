@@ -8,6 +8,7 @@
         <attr name="seekbar_value" format="integer" />
         <attr name="seekbar_wantedVAlue" format="integer" />
         <attr name="seekbar_max_value" format="integer" />
+        <attr name="seekbar_animation_duration" format="integer" />
     </declare-styleable>
 
 </resources>
