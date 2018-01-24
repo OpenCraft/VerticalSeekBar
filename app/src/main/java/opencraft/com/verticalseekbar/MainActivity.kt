@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         seekbar.setVerticalSeekBarListener(object : VerticalSeekBarListener {
             override fun onAnimationStop(thumbY: Float, backgroundY: Float) {
                 balloon.y = thumbY - 15
-                balloon.visibility = View.VISIBLE
+                balloon.animate().alpha(1.0f).setDuration(1000).start()
                 animationStoped = true
             }
 
