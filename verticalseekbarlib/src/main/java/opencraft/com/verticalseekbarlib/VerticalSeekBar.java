@@ -153,12 +153,6 @@ public class VerticalSeekBar extends RelativeLayout {
                     listener.onAnimationStop(verticalSeekBarThumb.getY(),
                             verticalSeekBarBackground.getY());
                 }
-
-                @Override
-                public void onAnimationStart(Animator animation) {
-                    super.onAnimationStart(animation);
-
-                }
             });
             listener.onYPositionChanged(finalYPosition + thumbMarginTop, finalYPosition);
         }
