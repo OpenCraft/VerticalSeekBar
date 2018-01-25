@@ -131,13 +131,26 @@ public class VerticalSeekBar extends RelativeLayout {
         return getHeight() / interations;
     }
 
-    public void applyInitialAnimation(int wantedValue) {
+    public void applyInitialValue(int wantedValue, boolean withAnimation) {
         int pixelNumberToInteractionWithoutMargin = calculatePixelToInteraction();
 
         int interationsToGetWantedValue = wantedValue / step;
         float wantedValueY = interationsToGetWantedValue * pixelNumberToInteractionWithoutMargin;
-        AnimatorSet animSetViews = new AnimatorSet();
 
+        if (withAnimation) {
+            applyAnimation(pixelNumberToInteractionWithoutMargin, wantedValueY);
+        } else {
+            calculateValueFromYPosition((int) wantedValueY, pixelNumberToInteractionWithoutMargin);
+            verticalSeekBarThumb.setY(wantedValueY + thumbMarginTop);
+            verticalSeekBarBackground.setY(wantedValueY);
+            addMarginToBackground(wantedValueY);
+            callOnValueChanged(calculatedValue);
+            listener.onYPositionChanged(wantedValueY + thumbMarginTop, wantedValueY);
+        }
+    }
+
+    private void applyAnimation(int pixelNumberToInteractionWithoutMargin, float wantedValueY) {
+        AnimatorSet animSetViews = new AnimatorSet();
         for (int i = (int) verticalSeekBarBackground.getY(); i <= wantedValueY; i++) {
             final int finalYPosition = i;
             calculateValueFromYPosition(i, pixelNumberToInteractionWithoutMargin);
