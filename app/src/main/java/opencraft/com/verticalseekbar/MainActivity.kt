@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-        seekbar.post { seekbar.applyInitialValue(1075, false) }
+        seekbar.post { seekbar.applyInitialValue(1075, true) }
     }
 
 }

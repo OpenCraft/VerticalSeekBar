@@ -190,7 +190,8 @@ public class VerticalSeekBar extends RelativeLayout {
             callOnValueChanged(calculatedValue);
         } else {
             if (wantedY >= maxValueY) {
-                callOnValueChanged(value == maxValue ? 0 : maxValue);
+                int valueChanged = value == maxValue ? 0 : value - maxValue;
+                callOnValueChanged(valueChanged);
                 setYPosition(maxValueY, maxValueY);
             }
             if (wantedY <= 0) {
